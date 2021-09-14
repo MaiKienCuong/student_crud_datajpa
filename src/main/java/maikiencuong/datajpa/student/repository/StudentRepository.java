@@ -12,23 +12,23 @@ import java.util.List;
 @Repository
 public interface StudentRepository extends JpaRepository<Student, Long> {
 
-    @Query(value = "select * from students where last_name like %:lastName%", nativeQuery = true)
+    @Query(value = "select s from Student s where s.lastName like %:lastName%")
     List<Student> findAllByLastNameContainingIgnoreCase(String lastName);
 
-    @Query(value = "select * from students where malop like %:malop%", nativeQuery = true)
+    @Query(value = "select s from Student s where s.malop like %:malop%")
     List<Student> findAllByMalopContainingIgnoreCase(String malop);
 
-    @Query(value = "select * from students", nativeQuery = true)
+    @Query(value = "from Student")
     List<Student> findAll();
 
     @Transactional
     @Modifying
-    @Query(value = "update students set malop=:malop where id=:id", nativeQuery = true)
+    @Query(value = "update Student s set s.malop=:malop where s.id=:id")
     void updateNewMalop(Long id, String malop);
 
     @Transactional
     @Modifying
-    @Query(value = "delete students where id=:id", nativeQuery = true)
+    @Query(value = "delete from Student where id=:id")
     void deleteByIdd(Long id);
 
 }
