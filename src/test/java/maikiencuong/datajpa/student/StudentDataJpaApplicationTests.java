@@ -15,7 +15,7 @@ class StudentDataJpaApplicationTests {
     @Autowired
     private StudentRepository studentRepository;
 
-    //    @Test
+//    @Test
     void insertStudent() {
         studentRepository.save(Student.builder()
                 .firstName("Mai Kiên")
@@ -77,8 +77,7 @@ class StudentDataJpaApplicationTests {
     void update() {
         List<Student> dhktpm14 = studentRepository.findAllByMalopContainingIgnoreCase("dhktpm14");
         for (Student s : dhktpm14) {
-            s.setMalop("DHKTPM15");
-            studentRepository.save(s);
+            studentRepository.updateNewMalop(s.getId(), "DHKTPM15");
         }
     }
 
@@ -86,7 +85,7 @@ class StudentDataJpaApplicationTests {
     void delete() {
         List<Student> dhktpm14 = studentRepository.findAllByMalopContainingIgnoreCase("dhktpm15");
         for (Student s : dhktpm14) {
-            studentRepository.delete(s);
+            studentRepository.deleteByIdd(s.getId());
         }
     }
 
